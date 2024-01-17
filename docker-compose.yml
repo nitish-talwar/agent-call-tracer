@@ -1,0 +1,17 @@
+version: '3.4'
+
+services:
+  sql.data:
+    image: microsoft/mssql-server-windows-developer
+
+  rabbitmq:
+    image: rabbitmq:3.7.7
+
+  agentcalltracker: 
+    image: agentcalltracker.api
+    build:
+      context: .
+      dockerfile: AgentCallTracker\Dockerfile
+    depends_on:
+      - sql.data
+      - rabbitmq
